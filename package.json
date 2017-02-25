@@ -1,7 +1,7 @@
 {
   "name": "sirver",
   "version": "1.0.0",
-  "description": "A tiny but very polite server to build simple HTTP services.",
+  "description": "A tiny, but very polite, server to build simple async HTTP services.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,11 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/danillouz/sirver.git"
   },
-  "keywords": [],
+  "keywords": [
+    "async",
+    "http",
+    "server",
+    "web-server",
+    "http-services"
+  ],
   "author": "Daniël Illouz <daniel.illouz@me.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/danillouz/sirver/issues"
   },
-  "homepage": "https://github.com/danillouz/sirver#readme"
+  "homepage": "https://github.com/danillouz/sirver#readme",
+  "dependencies": {
+    "content-type": "^1.0.2",
+    "raw-body": "^2.2.0"
+  }
 }
