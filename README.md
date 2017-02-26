@@ -54,6 +54,8 @@ for body parsing functionality._
 
 ## Basic
 ```js
+'use strict';
+
 const { sir } = require('sirver');
 
 const server = sir((req, res) => {
@@ -65,6 +67,8 @@ server.listen(7777);
 
 ## JSON
 ```js
+'use strict';
+
 const { sir } = require('sirver');
 
 const server = sir((req, res) => {
@@ -76,6 +80,8 @@ server.listen(7777);
 
 ## HTML
 ```js
+'use strict';
+
 const { sir } = require('sirver');
 
 const server = sir((req, res) => {
@@ -99,6 +105,8 @@ server.listen(7777);
 
 ## Async
 ```js
+'use strict';
+
 const { sir } = require('sirver');
 
 const server = sir(async (req, res) => {
@@ -121,6 +129,8 @@ server.listen(7777);
 
 ## Parsing request body
 ```js
+'use strict';
+
 const { sir, bodyParser } = require('sirver');
 
 const server = sir(async (req, res) => {
@@ -136,6 +146,8 @@ server.listen(7777);
 
 ## Custom response codes
 ```js
+'use strict';
+
 const { sir, bodyParser } = require('sirver');
 
 const server = sir(async (req, res) => {
@@ -148,6 +160,43 @@ const server = sir(async (req, res) => {
 	}
 
 	res.json({ name });
+});
+
+server.listen(7777);
+```
+
+## Route handling
+```js
+'use strict';
+
+const url = require('url');
+const { sir, bodyParser } = require('sirver');
+
+const server = sir(async (req, res) => {
+	try {
+		const { method } = req;
+		const { pathname } = url.parse(req.url);
+
+		if (method === 'GET' && pathname === '/') {
+			return res.json({
+				status: 'ok for route "/"'
+			});
+		}
+
+		if (method === 'POST' && pathname === '/run') {
+			return res.json({
+				status: 'ok for route "/run"'
+			});
+		}
+
+		res.status(404).json({
+			error: 'The requested route doesn\'t exist.'
+		});
+	} catch (err) {
+		res.status(err.code || 500).json({
+			error: err.toString()
+		});
+	}
 });
 
 server.listen(7777);
