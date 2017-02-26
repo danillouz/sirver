@@ -34,13 +34,17 @@ See the [examples](#examples) section for more information.
 ### Returns
 [http.Server](https://nodejs.org/api/http.html#http_class_http_server)
 
-## bodyParser(request)
+## bodyParser(request, limit)
 Parses and returns an incoming HTTP JSON request body as a JavaScript Object.
 
 ### Arguments
 | argument | type | required | description |
 | --- | --- | --- | --- |
 | request | Object | Yes | The [http.incomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) Object, exposed by [requestHandler](#sirrequesthandler). See [this example](#parsing-request-body) for more information. |
+| limit | Number or String | No | The byte limit of the body. This is the number of bytes or any string format supported by [bytes](https://github.com/visionmedia/bytes.js), for example `1000`, `'500kb'` or `'3mb'`. If the body ends up being larger than this limit, a `413` error code is returned. **Defaults to 1 MB**. |
+
+_Note that the [raw-body](https://github.com/stream-utils/raw-body) module is used
+for body parsing functionality._
 
 ### Returns
 `Promise`
