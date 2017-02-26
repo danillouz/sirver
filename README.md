@@ -1,5 +1,5 @@
 # Sir 🎩 ver
-A tiny, but very polite, server to build simple async HTTP services.
+A tiny, very polite, server for building simple async HTTP services.
 
 # Install
 ```
@@ -7,8 +7,47 @@ npm i -S sirver
 ```
 
 # API
-- sir
-- bodyParser
+The following methods are exposed:
+
+| method | arguments | returns | description |
+| --- | --- | --- | --- |
+| [sir](#sirrequesthandler) | Yes | Object | Creates and returns an instance of the [http.Server](https://nodejs.org/api/http.html#http_class_http_server) Object. |
+| [bodyParser](#bodyparserrequest) | Yes | Promise | Parses and returns an incoming HTTP JSON request body as a JavaScript Object. |
+
+### sir(requestHandler)
+Creates and returns an instance of the [http.Server](https://nodejs.org/api/http.html#http_class_http_server) Object.
+
+**Arguments**
+
+| argument | type | required | description |
+| --- | --- | --- | --- |
+| requestHandler | Function | Yes | This handler is invoked upon every incoming HTTP request and exposes the [http.incomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) and [http.serverResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse) Objects. The `requestHandler` supports `async-await`, see [this example](#async) for more information. |
+
+The `requestHandler` exposes a couple of convenience methods on the
+`http.serverResponse` Object:
+
+- `res.status(Number)`: `Number` is a valid http status code, for example `401`.
+- `res.html(String)`: `String` is a valid HTML document representation.
+- `res.json(Object)`: `Object` is a valid JavaScript Object, which can be parsed to JSON.
+
+See the [examples](#examples) section for more information.
+
+**Returns**
+
+[http.Server](https://nodejs.org/api/http.html#http_class_http_server)
+
+### bodyParser(request)
+Parses and returns an incoming HTTP JSON request body as a JavaScript Object.
+
+**Arguments**
+
+| argument | type | required | description |
+| --- | --- | --- | --- |
+| request | Object | Yes | The [http.incomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) Object, exposed by [requestHandler](#sirrequesthandler). See [this example](#parsing-request-body) for more information. |
+
+**Returns**
+
+`Promise`
 
 # Examples
 
@@ -115,6 +154,9 @@ server.listen(7777);
 
 # Engine
 Node `7.6` or greater is required due to use of `async-await`.
+
+# Todos
+There's no proper error handling yet.
 
 # License
 MIT Copyright (c) 2017 Daniël Illouz

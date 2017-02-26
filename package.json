@@ -1,7 +1,7 @@
 {
   "name": "sirver",
   "version": "1.0.0",
-  "description": "A tiny, but very polite, server to build simple async HTTP services.",
+  "description": "A tiny, very polite, server for building simple async HTTP services.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,7 @@
     "async",
     "http",
     "server",
-    "web-server",
+    "http-server",
     "http-services"
   ],
   "author": "Daniël Illouz <daniel.illouz@me.com>",
