@@ -4,6 +4,21 @@ const http = require('http');
 const contentType = require('content-type');
 const getRawBody = require('raw-body');
 
+function _throwNoHandlerError() {
+	throw new Error(
+		'Pardon me! A request handler is required.' +
+		'For Example: `(req, res) => res.end(\'ok\')`.'
+	);
+}
+
+function _throwNoReqError() {
+	throw new Error(
+		'I beg your pardon! A request Object is required.' +
+		'It\'s exposed by the request handler you passed to the `sir` method.' +
+		'For exaple: `bodyParser(req).then(console.log)`'
+	);
+}
+
 function _status(code) {
 	this.statusCode = code;
 
@@ -25,7 +40,9 @@ function _html(html = '') {
 }
 
 module.exports = {
-	sir(handler) {
+	sir(
+		handler = _throwNoHandlerError()
+	) {
 		const server = http.createServer((req, res) => {
 			res.status = _status;
 			res.html = _html;
@@ -43,7 +60,10 @@ module.exports = {
 		return server;
 	},
 
-	async bodyParser(req, limit = '1mb') {
+	async bodyParser(
+		req = _throwNoReqError(),
+		limit = '1mb'
+	) {
 		try {
 			const length = req.headers['content-length'];
 			const encoding = contentType.parse(req).parameters.charset;
