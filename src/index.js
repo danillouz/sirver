@@ -1,7 +1,6 @@
 'use strict';
 
 const http = require('http');
-const url = require('url');
 const contentType = require('content-type');
 const getRawBody = require('raw-body');
 const { throwNoReqHandlerError,	throwNoReqError } = require('./err');
@@ -13,7 +12,7 @@ module.exports = {
 		const server = http.createServer((req, res) => {
 			req.isPost = isPost;
 			req.isGet = isGet;
-			req.isPut = _sPut;
+			req.isPut = isPut;
 			req.isPatch = isPatch;
 			req.isDelete = isDelete;
 			res.status = status;
@@ -51,7 +50,6 @@ module.exports = {
 			return json;
 		} catch (err) {
 			// TODO: error handling
-
 			if (err.type === 'entity.too.large') {
 				// 413
 				console.log(`Request body exceededs the ${limit} limit.`, err);
