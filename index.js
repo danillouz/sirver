@@ -6,16 +6,16 @@ const getRawBody = require('raw-body');
 
 function _throwNoHandlerError() {
 	throw new Error(
-		'Pardon me! A request handler is required.' +
-		'For Example: `(req, res) => res.end(\'ok\')`.'
+		'Excuse me! A request handler is required. ' +
+		'For Example: `sir((req, res) => res.end(\'ok\'))`.'
 	);
 }
 
 function _throwNoReqError() {
 	throw new Error(
-		'I beg your pardon! A request Object is required.' +
-		'It\'s exposed by the request handler you passed to the `sir` method.' +
-		'For exaple: `bodyParser(req).then(console.log)`'
+		'I beg your pardon! A request Object is required. ' +
+		'It\'s exposed by the request handler you passed to the `sir()` method. ' +
+		'For example: `bodyParser(req).then(console.log)`.'
 	);
 }
 
