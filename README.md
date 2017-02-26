@@ -14,11 +14,10 @@ The following methods are exposed:
 | [sir](#sirrequesthandler) | Yes | Object | Creates and returns an instance of the [http.Server](https://nodejs.org/api/http.html#http_class_http_server) Object. |
 | [bodyParser](#bodyparserrequest) | Yes | Promise | Parses and returns an incoming HTTP JSON request body as a JavaScript Object. |
 
-### sir(requestHandler)
+## sir(requestHandler)
 Creates and returns an instance of the [http.Server](https://nodejs.org/api/http.html#http_class_http_server) Object.
 
-**Arguments**
-
+### Arguments
 | argument | type | required | description |
 | --- | --- | --- | --- |
 | requestHandler | Function | Yes | This handler is invoked upon every incoming HTTP request and exposes the [http.incomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) and [http.serverResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse) Objects. The `requestHandler` supports `async-await`, see [this example](#async) for more information. |
@@ -26,32 +25,29 @@ Creates and returns an instance of the [http.Server](https://nodejs.org/api/http
 The `requestHandler` exposes a couple of convenience methods on the
 `http.serverResponse` Object:
 
-- `res.status(Number)`: `Number` is a valid http status code, for example `401`.
+- `res.status(Number)`: `Number` is a valid http status code.
 - `res.html(String)`: `String` is a valid HTML document representation.
 - `res.json(Object)`: `Object` is a valid JavaScript Object, which can be parsed to JSON.
 
 See the [examples](#examples) section for more information.
 
-**Returns**
-
+### Returns
 [http.Server](https://nodejs.org/api/http.html#http_class_http_server)
 
-### bodyParser(request)
+## bodyParser(request)
 Parses and returns an incoming HTTP JSON request body as a JavaScript Object.
 
-**Arguments**
-
+### Arguments
 | argument | type | required | description |
 | --- | --- | --- | --- |
 | request | Object | Yes | The [http.incomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) Object, exposed by [requestHandler](#sirrequesthandler). See [this example](#parsing-request-body) for more information. |
 
-**Returns**
-
+### Returns
 `Promise`
 
 # Examples
 
-### Basic
+## Basic
 ```js
 const { sir } = require('sirver');
 
@@ -62,7 +58,7 @@ const server = sir((req, res) => {
 server.listen(7777);
 ```
 
-### JSON
+## JSON
 ```js
 const { sir } = require('sirver');
 
@@ -73,7 +69,7 @@ const server = sir((req, res) => {
 server.listen(7777);
 ```
 
-### HTML
+## HTML
 ```js
 const { sir } = require('sirver');
 
@@ -96,7 +92,7 @@ const server = sir((req, res) => {
 server.listen(7777);
 ```
 
-### Async
+## Async
 ```js
 const { sir } = require('sirver');
 
@@ -118,7 +114,7 @@ const server = sir(async (req, res) => {
 server.listen(7777);
 ```
 
-### Parsing request body
+## Parsing request body
 ```js
 const { sir, bodyParser } = require('sirver');
 
@@ -133,7 +129,7 @@ const server = sir(async (req, res) => {
 server.listen(7777);
 ```
 
-### Custom response codes
+## Custom response codes
 ```js
 const { sir, bodyParser } = require('sirver');
 
