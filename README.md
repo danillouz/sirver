@@ -22,12 +22,41 @@ Creates and returns an instance of the [http.Server](https://nodejs.org/api/http
 | --- | --- | --- | --- |
 | requestHandler | Function | Yes | This handler is invoked upon every incoming HTTP request and exposes the [http.incomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) and [http.serverResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse) Objects. The `requestHandler` supports `async-await`, see [this example](#async) for more information. |
 
+#### Request convenience methods
+The `requestHandler` exposes a couple of convenience methods on the
+`http.incomingMessage` Object:
+
+- `req.isPost(path:String, handler:Function)`
+- `req.isGet(path:String, handler:Function)`
+- `req.isPut(path:String, handler:Function)`
+- `req.isPatch(path:String, handler:Function)`
+- `req.isDelete(path:String, handler:Function)`
+
+These methods accept a `path` and `handler` argument, where the `handler`
+Function is only executed when **both** the request method **and** the request
+`path` match.
+
+For example:
+
+```js
+req.isGet('/', () => {
+	// Only invoked ONLY for GET '/' requests
+})
+
+req.isGet('/client', () => {
+	// Invoked ONLY for GET '/client' requests
+})
+```
+
+_Note that currently the `path` **must** be an **exact** match._
+
+#### Response convenience methods
 The `requestHandler` exposes a couple of convenience methods on the
 `http.serverResponse` Object:
 
-- `res.status(Number)`: `Number` is a valid http status code.
-- `res.html(String)`: `String` is a valid HTML document representation.
-- `res.json(Object)`: `Object` is a valid JavaScript Object, which can be parsed to JSON.
+- `res.status(code:Number)`: `code` is a valid http status code.
+- `res.html(html:String)`: `html` is a valid HTML document representation.
+- `res.json(data:Object)`: `data` is a valid JavaScript Object, which can be parsed to JSON.
 
 See the [examples](#examples) section for more information.
 
